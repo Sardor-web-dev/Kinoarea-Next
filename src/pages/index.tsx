@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Header from "@/components/custom/Header";
 import { useEffect, useState } from "react";
 import Image from "next/image";
