@@ -1,23 +1,32 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaVk } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
-import { FaFacebookF } from "react-icons/fa";
+import { FaVk, FaInstagram, FaFacebookF, FaSearch } from "react-icons/fa";
 import { IoLogoTwitter } from "react-icons/io";
 import { Button } from "@/components/ui/button";
-import { FaSearch } from "react-icons/fa";
 
-const Header = () => {
+type props ={
+  title: string
+}
+
+const Header = (props: props) => {
   const iconStyles = "hover:text-white cursor-pointer transition";
-  const linkStyles = "hover:text-[#3657CB] transition";
+  const linkStyles = "hover:text-[#3657CB] transition whitespace-nowrap";
 
   return (
     <>
-      <div className="flex w-[1250px] flex-col items-center gap-10">
-        <div className="flex w-full items-center justify-between">
+      <div className="flex w-full max-w-[1250px] flex-col items-center gap-10 px-4 mx-auto">
+        <div className="flex w-full flex-col lg:flex-row items-center justify-between gap-6">
           <div className="flex flex-col items-center">
             <div>
-              <Image src="/logo.png" width={150} height={150} alt="logo" />
+              <Link href={"/"}>
+                <Image
+                  src="/logo.png"
+                  width={150}
+                  height={150}
+                  alt="logo"
+                  className="cursor-pointer"
+                />
+              </Link>
             </div>
             <div className="flex gap-2 mt-2 text-xl text-gray-600">
               <FaVk className={iconStyles} title="VK" />
@@ -26,14 +35,15 @@ const Header = () => {
               <IoLogoTwitter className={iconStyles} title="Twitter" />
             </div>
           </div>
-          <div className="flex gap-4 text-sm md:text-base">
+
+          <div className="flex flex-wrap justify-center gap-4 text-sm md:text-base text-center">
             <Link className={linkStyles} href="/">
               Афиша
             </Link>
             <Link className={linkStyles} href="/">
               Медия
             </Link>
-            <Link className={linkStyles} href="/">
+            <Link className={linkStyles} href="/popular">
               Фильмы
             </Link>
             <Link className={linkStyles} href="/">
@@ -52,27 +62,44 @@ const Header = () => {
 
           <div className="flex items-center gap-2">
             <Button
-              className="h-[53px] bg-white cursor-pointer hover:bg-white hover:opacity-75"
+              className="h-[45px] w-[45px] bg-white cursor-pointer hover:bg-white hover:opacity-75"
               aria-label="Поиск"
             >
               <FaSearch className="text-gray-500 hover:text-black" />
             </Button>
 
-            <Button className="w-[138px] h-[53px] bg-[#3657CB] shadow-[0_5px_20px_rgba(8,_112,_184,_0.7)] hover:bg-[#3670CB] cursor-pointer transition-all text-white hover:shadow-[5px_10px_20px_rgba(8,_112,_184,_0.7)]">
+            <Button className="w-[120px] h-[45px] bg-[#3657CB] shadow-[0_4px_16px_rgba(8,_112,_184,_0.6)] hover:bg-[#3670CB] cursor-pointer transition-all text-white hover:shadow-[4px_8px_16px_rgba(8,_112,_184,_0.6)]">
               Войти
             </Button>
           </div>
         </div>
-        <div className="flex gap-10 w-full items-center">
-          <p className="text-4xl font-bold">Сейчас в кино</p>
-          <div className="border-b-2 w-23 border-white"></div>
-          <p className="text-xl cursor-pointer hover:text-white transition text-white">Все</p>
-          <p className="text-xl cursor-pointer hover:text-white transition text-gray-500">Боевики</p>
-          <p className="text-xl cursor-pointer hover:text-white transition text-gray-500">Приключения</p>
-          <p className="text-xl cursor-pointer hover:text-white transition text-gray-500">Комедии</p>
-          <p className="text-xl cursor-pointer hover:text-white transition text-gray-500">Фантастика</p>
-          <p className="text-xl cursor-pointer hover:text-white transition text-gray-500">Триллеры</p>
-          <p className="text-xl cursor-pointer hover:text-white transition text-gray-500">Драма</p>
+
+        <div className="flex flex-wrap justify-center gap-6 w-full items-center text-center">
+          <p className="text-2xl sm:text-3xl md:text-4xl font-bold w-full">
+            {props.title}
+          </p>
+          <div className="border-b-2 w-24 border-white"></div>
+          <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-white">
+            Все
+          </p>
+          <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-gray-500">
+            Боевики
+          </p>
+          <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-gray-500">
+            Приключения
+          </p>
+          <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-gray-500">
+            Комедии
+          </p>
+          <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-gray-500">
+            Фантастика
+          </p>
+          <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-gray-500">
+            Триллеры
+          </p>
+          <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-gray-500">
+            Драма
+          </p>
         </div>
       </div>
     </>
