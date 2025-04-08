@@ -5,7 +5,7 @@ import { IoLogoTwitter } from "react-icons/io";
 import { Button } from "@/components/ui/button";
 
 type props ={
-  title: string
+  title: string | undefined
 }
 
 const Header = (props: props) => {
