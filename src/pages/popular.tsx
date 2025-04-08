@@ -34,8 +34,8 @@ export default function Popular() {
             <CardMovie key={movie.id} movie={movie} />
           ))}
         </div>
+      <Footer />  
       </div>
-      <Footer />
     </div>
   );
 }
