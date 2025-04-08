@@ -11,33 +11,35 @@ const CardMovie = ({ movie }: Props) => {
   return (
     <>
       <div>
-        <div className="group relative shadow-lg overflow-hidden rounded-lg cursor-pointer select-none">
-          <div className="absolute inset-0 bg-[#3657CBA6] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
-          <Image
-            width={500}
-            height={750}
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
-            className="w-full h-auto object-cover"
-          />
-          <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
-            <Link href={`/film/${movie.id}`}>
-              <button className="bg-white text-[#3657CB] font-bold w-[200px] h-[60px] rounded-lg cursor-pointer">
-                Карточка фильма
-              </button>
-            </Link>
+        <Link href={`/film/${movie.id}`}>
+          <div className="group relative shadow-lg overflow-hidden rounded-lg cursor-pointer select-none">
+            <div className="absolute inset-0 bg-[#3657CBA6] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+            <Image
+              width={500}
+              height={750}
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={movie.title}
+              className="w-full h-auto object-cover"
+            />
+            <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+              <Link href={`/film/${movie.id}`}>
+                <button className="bg-white text-[#3657CB] font-bold w-[200px] h-[60px] rounded-lg cursor-pointer">
+                  Карточка фильма
+                </button>
+              </Link>
+            </div>
           </div>
-        </div>
-        <div className="mt-2">
-          <h3 className="text-white text-sm font-bold">{movie.title}</h3>
-          <p className="text-xs text-yellow-400 mt-1">
-            {movie.genre_ids
-              .map((id) => genres[id])
-              .filter(Boolean)
-              .slice(0, 2)
-              .join(", ")}
-          </p>
-        </div>
+          <div className="mt-2">
+            <h3 className="text-white text-sm font-bold">{movie.title}</h3>
+            <p className="text-xs text-yellow-400 mt-1">
+              {movie.genre_ids
+                .map((id) => genres[id])
+                .filter(Boolean)
+                .slice(0, 2)
+                .join(", ")}
+            </p>
+          </div>
+        </Link>
       </div>
     </>
   );
