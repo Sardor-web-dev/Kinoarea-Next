@@ -13,39 +13,12 @@ import axios from "axios";
 import { myKey } from "@/exports";
 import Header from "@/components/custom/Header";
 import Image from "next/image";
-
-type Genre = {
-  id: number;
-  name: string;
-};
-
-type Actor = {
-  cast_id: number;
-  name: string;
-  character: string;
-  profile_path: string;
-};
-
-type Film = {
-  id: number;
-  title: string;
-  overview: string;
-  poster_path: string;
-  tagline: string;
-  origin_country: string[];
-  release_date: string;
-  budget: number;
-  runtime: number;
-  genres: Genre[];
-  credits: {
-    cast: Actor[];
-  };
-};
+import { film } from "@/types/filmTypes";
 
 const Film = () => {
   const router = useRouter();
   const { id } = router.query;
-  const [film, setFilm] = useState<Film | null>(null);
+  const [film, setFilm] = useState<film | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -68,8 +41,20 @@ const Film = () => {
   }, [router.isReady, id]);
 
   return (
-    <div className="bg-[#1e2538] min-h-screen text-white">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+    <div
+      className="w-full bg-no-repeat h-screen bg-center bg-top bg-[#1e2538] text-white relative"
+      style={{
+        backgroundImage: film?.backdrop_path
+          ? `url(https://image.tmdb.org/t/p/original${film.backdrop_path})`
+          : "none",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="absolute inset-0 bg-black opacity-40 z-10"></div>
+
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 relative z-20">
         <Header title={film?.title} />
         {loading ? (
           <div className="py-10">
