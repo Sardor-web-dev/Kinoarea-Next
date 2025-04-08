@@ -3,7 +3,7 @@ import { FaVk, FaInstagram, FaFacebookF, FaTwitter, FaYoutube } from "react-icon
 
 const Footer = () => {
   return (
-    <div>
+    <div className="bg-[#151A26]">
       <div
         className="mt-24 py-10 px-4 md:px-10 lg:px-20 rounded-lg bg-cover bg-center"
         style={{ backgroundImage: "url(/footer_img.png)" }}
@@ -37,7 +37,7 @@ const Footer = () => {
         </label>
       </div>
 
-      <footer className="mt-10 bg-[#151A26] py-8 px-4">
+      <footer className="bg-[#151A26] mt-2 py-8 px-4">
         <div className="flex justify-center gap-5 text-[#646462] mb-6">
           <FaVk size={20} className="hover:text-white cursor-pointer" />
           <FaInstagram size={20} className="hover:text-white cursor-pointer" />

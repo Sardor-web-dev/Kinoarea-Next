@@ -48,19 +48,6 @@ const PopularFilms = () => {
         <h1 className="text-4xl md:text-6xl font-black text-white">
           Популярные фильмы
         </h1>
-        <div className="flex items-center gap-5 text-white">
-          <FaArrowLeft
-            className="cursor-pointer hover:opacity-75"
-            onClick={prevPage}
-          />
-          <span>
-            {currentPage + 1} / {Math.ceil(popularFilms.length / filmsPerPage)}
-          </span>
-          <FaArrowRight
-            className="cursor-pointer hover:opacity-75"
-            onClick={nextPage}
-          />
-        </div>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-10">

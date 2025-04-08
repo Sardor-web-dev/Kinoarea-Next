@@ -21,7 +21,12 @@ export default function Popular() {
 
   console.log(movies);
   return (
-    <div className="flex flex-col items-center gap-10 bg-gradient-to-br from-[#0C0C0C] to-[#1A1A1A]">
+    <div
+      className="flex flex-col items-center gap-10 w-full bg-no-repeat bg-center bg-top bg-[#1e2538]"
+      style={{
+        backgroundImage: "url(/main-bg.png)",
+      }}
+    >
       <Header title={"Сейчас в кино"} />
       <div className="max-w-[1250px]">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-6">
@@ -30,7 +35,7 @@ export default function Popular() {
           ))}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
