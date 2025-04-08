@@ -54,7 +54,7 @@ const Film = () => {
     const fetchFilm = async () => {
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${id}?language=ru-RU&append_to_response=credits&api_key=${myKey}`
+          `https://api.themoviedb.org/3/movie/${id}?language=en-EN&append_to_response=credits&api_key=${myKey}`
         );
         setFilm(response.data);
       } catch (error) {
