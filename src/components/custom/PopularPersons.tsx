@@ -55,7 +55,7 @@ const PopularPerson = () => {
   const rest = persons.slice(2);
 
   return (
-    <div className="flex flex-col gap-10 px-6 md:px-20 py-10 min-h-screen text-white">
+    <div className="flex flex-col gap-10  text-white">
       <div className="flex w-full justify-between items-center">
         <p className="text-4xl md:text-6xl font-black">Популярные персоны</p>
         <div className="flex items-center gap-6 text-xl font-bold text-gray-500">
@@ -65,8 +65,7 @@ const PopularPerson = () => {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-8">
-        {/* Топ-2 */}
+      <div className="flex flex-col justify-between lg:flex-row gap-8">
         <div className="flex gap-6 flex-wrap">
           {topTwo.map((person, index) => (
             <Link
@@ -98,7 +97,6 @@ const PopularPerson = () => {
           ))}
         </div>
 
-        {/* Остальные */}
         <div className="bg-zinc-800 rounded-2xl p-4 w-full max-w-sm">
           {rest.map((person, index) => (
             <Link
