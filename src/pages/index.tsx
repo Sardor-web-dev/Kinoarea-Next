@@ -7,6 +7,7 @@ import Footer from "@/components/custom/footer";
 import CardMovie from "@/components/custom/CardMovie";
 import UpcomingFilms from "@/components/custom/Upcoming";
 import PopularFilms from "@/components/custom/PopularFilms";
+import PopularPerson from "@/components/custom/PopularPersons";
 
 export default function Home() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -37,6 +38,7 @@ export default function Home() {
               <CardMovie key={movie.id} movie={movie} />
             ))}
           </div>
+          <PopularPerson/>
           <UpcomingFilms />
           <PopularFilms />
           <Footer />
