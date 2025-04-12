@@ -16,7 +16,7 @@ const PopularPerson = ({ persons }: {persons: Person[]}) => {
     <div className="flex flex-col mt-10 gap-10 text-white">
       <div className="flex w-full justify-between items-center">
         <p className="text-4xl md:text-6xl font-black">Популярные персоны</p>
-        <div className="flex items-center gap-6 text-xl font-bold text-gray-500">
+        <div className="hidden lg:flex items-center gap-6 text-xl font-bold text-gray-500">
           <span className="hover:text-white cursor-pointer">За год</span>
           <span className="hover:text-white cursor-pointer">За месяц</span>
           <span className="text-white cursor-pointer">За неделю</span>
