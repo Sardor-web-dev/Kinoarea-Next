@@ -7,11 +7,11 @@ import { Button } from "@/components/ui/button";
 const Header = ({ title }: { title: string | undefined }) => {
   const iconStyles = "hover:text-white cursor-pointer transition";
   const linkStyles =
-    "hover:text-[#3657CB] transition whitespace-nowrap text-sm md:text-base"; // Уменьшаем текст на мобильных устройствах
+    "hover:text-[#3657CB] transition whitespace-nowrap text-sm md:text-base";
 
   return (
     <>
-      <div className="flex w-full max-w-[1250px] flex-col items-center gap-10 px-4 mx-auto">
+      <div className="flex w-full mt-5 max-w-[1250px] flex-col items-center gap-10 px-4 mx-auto">
         <div className="flex w-full lg:flex-row items-center justify-between gap-6">
           <div className="flex flex-col items-center">
             <div>
@@ -71,8 +71,9 @@ const Header = ({ title }: { title: string | undefined }) => {
           </div>
         </div>
 
-        <div className="lg:flex flex-wrap justify-center gap-6 w-full items-center text-center mt-4">
+        <div className="lg:flex flex justify-between gap-6 w-full items-center text-center mt-4">
           <p className="text-2xl sm:text-3xl md:text-4xl font-bold w-full">{title}</p>
+          <div className="hidden lg:flex lg:border-b-3 lg:text-white lg:w-25"></div>
           <div className="hidden lg:flex gap-4">
           <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-white">
             Все
