@@ -13,14 +13,16 @@ import { Person } from "@/types/person";
 export default function Home({
   movies,
   persons,
+  upcomingFilms, 
 }: {
   movies: Movie[];
   persons: Person[];
+  upcomingFilms: Movie[]; 
 }) {
-  const [visibleMovies, setVisibleMovies] = useState(8); // Изначально показываем 8 фильмов
+  const [visibleMovies, setVisibleMovies] = useState(8); 
 
   const showMoreMovies = () => {
-    setVisibleMovies((prev) => prev + 8); // Увеличиваем количество отображаемых фильмов на 8
+    setVisibleMovies((prev) => prev + 8); 
   };
 
   return (
@@ -52,7 +54,9 @@ export default function Home({
 
           <PopularPerson persons={persons} />
           <NewTrailers />
-          <UpcomingFilms />
+
+          <UpcomingFilms upcomingFilms={upcomingFilms} />
+
           <PopularFilms />
           <Footer />
         </div>
@@ -63,24 +67,29 @@ export default function Home({
 
 export async function getServerSideProps() {
   try {
-    const [moviesRes, personsRes] = await Promise.all([
+    const [moviesRes, personsRes, upcomingRes] = await Promise.all([
       fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${myKey}`),
       fetch(
         `https://api.themoviedb.org/3/person/popular?api_key=${myKey}&language=ru-RU&page=1`
       ),
+      fetch(
+        `https://api.themoviedb.org/3/movie/upcoming?api_key=${myKey}&language=ru-RU&page=1`
+      ),
     ]);
 
-    if (!moviesRes.ok || !personsRes.ok) {
+    if (!moviesRes.ok || !personsRes.ok || !upcomingRes.ok) {
       throw new Error("Ошибка при загрузке данных");
     }
 
     const moviesData = await moviesRes.json();
     const personsData = await personsRes.json();
+    const upcomingData = await upcomingRes.json();
 
     return {
       props: {
         movies: moviesData.results,
         persons: personsData.results,
+        upcomingFilms: upcomingData.results, 
       },
     };
   } catch (error) {
@@ -89,6 +98,7 @@ export async function getServerSideProps() {
       props: {
         movies: [],
         persons: [],
+        upcomingFilms: [],
       },
     };
   }

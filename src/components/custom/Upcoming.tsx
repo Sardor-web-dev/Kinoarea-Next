@@ -1,29 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import CardMovie from "@/components/custom/CardMovie";
-import { myKey } from "@/exports";
-import axios from "axios";
 import { Movie } from "@/types/movie";
 
-const UpcomingFilms = () => {
-  const [upcomingFilms, setUpcomingFilms] = useState([]);
+const UpcomingFilms = ({ upcomingFilms }: { upcomingFilms: Movie[] }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const filmsPerPage = 4;
-
-  useEffect(() => {
-    const fetchUpcomingFilms = async () => {
-      try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/upcoming?api_key=${myKey}&language=en-US&page=1`
-        );
-        setUpcomingFilms(response.data.results);
-      } catch (error) {
-        console.error("Error fetching upcoming films:", error);
-      }
-    };
-
-    fetchUpcomingFilms();
-  }, []);
 
   const nextPage = () => {
     if ((currentPage + 1) * filmsPerPage < upcomingFilms.length) {
@@ -37,10 +19,10 @@ const UpcomingFilms = () => {
     }
   };
 
-  const displayedMovies = upcomingFilms.slice(
+  const displayedMovies = upcomingFilms?.slice(
     currentPage * filmsPerPage,
     (currentPage + 1) * filmsPerPage
-  );
+  ) || [];
 
   return (
     <div className="mt-12 max-w-[1250px] mx-auto">
@@ -64,7 +46,7 @@ const UpcomingFilms = () => {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-10">
-        {displayedMovies.map((movie : Movie) => (
+        {displayedMovies.map((movie: Movie) => (
           <CardMovie key={movie.id} movie={movie} />
         ))}
       </div>
