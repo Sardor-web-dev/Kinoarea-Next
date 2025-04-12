@@ -1,61 +1,18 @@
-import { myKey } from "@/exports";
-import axios from "axios";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 interface Person {
   id: number;
   name: string;
   profile_path: string | null;
-  birthday?: string | null;
 }
 
-const getAge = (birthday: string | null | undefined): string => {
-  if (!birthday) return "";
-  const birthDate = new Date(birthday);
-  const ageDifMs = Date.now() - birthDate.getTime();
-  const ageDate = new Date(ageDifMs);
-  const age = Math.abs(ageDate.getUTCFullYear() - 1970);
-  return `${age} ${age % 10 === 1 && age !== 11 ? "год" : [2, 3, 4].includes(age % 10) && ![12, 13, 14].includes(age % 100) ? "года" : "лет"}`;
-};
-
-const PopularPerson = () => {
-  const [persons, setPersons] = useState<Person[]>([]);
-
-  useEffect(() => {
-    const fetchPopularPersons = async () => {
-      try {
-        const res = await axios.get(
-          `https://api.themoviedb.org/3/person/popular?api_key=${myKey}&language=ru-RU&page=1`
-        );
-        const topPeople = res.data.results.slice(0, 6);
-
-        const peopleWithBirthdays = await Promise.all(
-          topPeople.map(async (person: Person) => {
-            const detail = await axios.get(
-              `https://api.themoviedb.org/3/person/${person.id}?api_key=${myKey}&language=ru-RU`
-            );
-            return {
-              ...person,
-              birthday: detail.data.birthday,
-            };
-          })
-        );
-
-        setPersons(peopleWithBirthdays);
-      } catch (error) {
-        console.error("Ошибка загрузки данных:", error);
-      }
-    };
-
-    fetchPopularPersons();
-  }, []);
-
+const PopularPerson = ({ persons }: {persons: any[]}) => {
+  console.log(persons);
   const topTwo = persons.slice(0, 2);
   const rest = persons.slice(2);
 
   return (
-    <div className="flex flex-col gap-10  text-white">
+    <div className="flex flex-col gap-10 text-white">
       <div className="flex w-full justify-between items-center">
         <p className="text-4xl md:text-6xl font-black">Популярные персоны</p>
         <div className="flex items-center gap-6 text-xl font-bold text-gray-500">
@@ -89,9 +46,6 @@ const PopularPerson = () => {
                 <p className="text-white font-semibold text-lg">
                   {person.name}
                 </p>
-                <p className="text-yellow-400 text-sm">
-                  {getAge(person.birthday)}
-                </p>
               </div>
             </Link>
           ))}
@@ -104,12 +58,7 @@ const PopularPerson = () => {
               key={person.id}
               className="flex justify-between items-center py-4 border-b border-zinc-700 last:border-none hover:bg-zinc-700/40 px-2 rounded-lg transition"
             >
-              <div>
-                <p className="font-semibold text-white">{person.name}</p>
-                <p className="text-yellow-400 text-sm">
-                  {getAge(person.birthday)}
-                </p>
-              </div>
+              <p className="font-semibold text-white">{person.name}</p>
               <div className="text-yellow-400 font-bold text-sm">
                 {index + 3}-е место
               </div>
@@ -122,3 +71,5 @@ const PopularPerson = () => {
 };
 
 export default PopularPerson;
+
+

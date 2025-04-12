@@ -4,11 +4,8 @@ import { FaVk, FaInstagram, FaFacebookF, FaSearch } from "react-icons/fa";
 import { IoLogoTwitter } from "react-icons/io";
 import { Button } from "@/components/ui/button";
 
-type props ={
-  title: string | undefined
-}
 
-const Header = (props: props) => {
+const Header = ({title}: {title: string}) => {
   const iconStyles = "hover:text-white cursor-pointer transition";
   const linkStyles = "hover:text-[#3657CB] transition whitespace-nowrap";
 
@@ -76,9 +73,8 @@ const Header = (props: props) => {
 
         <div className="flex flex-wrap justify-center gap-6 w-full items-center text-center">
           <p className="text-2xl sm:text-3xl md:text-4xl font-bold w-full">
-            {props.title}
+            {title}
           </p>
-          <div className="border-b-2 w-24 border-white"></div>
           <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-white">
             Все
           </p>

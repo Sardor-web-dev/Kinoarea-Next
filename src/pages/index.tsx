@@ -1,28 +1,20 @@
 import Header from "@/components/custom/Header";
-import { useEffect, useState } from "react";
 import { myKey } from "@/exports";
-import axios from "axios";
 import { Movie } from "@/types/movie";
 import Footer from "@/components/custom/footer";
 import CardMovie from "@/components/custom/CardMovie";
 import UpcomingFilms from "@/components/custom/Upcoming";
 import PopularFilms from "@/components/custom/PopularFilms";
 import PopularPerson from "@/components/custom/PopularPersons";
+import { Person } from "@/types/person";
 
-export default function Home() {
-  const [movies, setMovies] = useState<Movie[]>([]);
-
-  useEffect(() => {
-    try {
-      axios
-        .get("https://api.themoviedb.org/3/movie/top_rated?api_key=" + myKey)
-        .then((res) => setMovies(res.data.results));
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  console.log(movies);
+export default function Home({
+  movies,
+  persons,
+}: {
+  movies: Movie[];
+  persons: Person[];
+}) {
   return (
     <>
       <div
@@ -38,7 +30,9 @@ export default function Home() {
               <CardMovie key={movie.id} movie={movie} />
             ))}
           </div>
-          <PopularPerson/>
+
+          <PopularPerson persons={persons} />
+
           <UpcomingFilms />
           <PopularFilms />
           <Footer />
@@ -46,4 +40,38 @@ export default function Home() {
       </div>
     </>
   );
+}
+
+
+export async function getServerSideProps() {
+  try {
+    const [moviesRes, personsRes] = await Promise.all([
+      fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${myKey}`),
+      fetch(
+        `https://api.themoviedb.org/3/person/popular?api_key=${myKey}&language=ru-RU&page=1`
+      ),
+    ]);
+
+    if (!moviesRes.ok || !personsRes.ok) {
+      throw new Error("Ошибка при загрузке данных");
+    }
+
+    const moviesData = await moviesRes.json();
+    const personsData = await personsRes.json();
+
+    return {
+      props: {
+        movies: moviesData.results,
+        persons: personsData.results,
+      },
+    };
+  } catch (error) {
+    console.error("Ошибка getServerSideProps:", error);
+    return {
+      props: {
+        movies: [],
+        persons: [],
+      },
+    };
+  }
 }

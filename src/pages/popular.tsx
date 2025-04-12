@@ -3,23 +3,8 @@ import Footer from "@/components/custom/footer";
 import Header from "@/components/custom/Header";
 import { myKey } from "@/exports";
 import { Movie } from "@/types/movie";
-import axios from "axios";
-import { useEffect, useState } from "react";
 
-export default function Popular() {
-  const [movies, setMovies] = useState<Movie[]>([]);
-
-  useEffect(() => {
-    try {
-      axios
-        .get("https://api.themoviedb.org/3/movie/popular?api_key=" + myKey)
-        .then((res) => setMovies(res.data.results));
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  console.log(movies);
+export default function Popular({ movies }: { movies: Movie[] }) {
   return (
     <div
       className="flex flex-col items-center gap-10 w-full bg-no-repeat bg-center bg-top bg-[#1e2538]"
@@ -34,8 +19,30 @@ export default function Popular() {
             <CardMovie key={movie.id} movie={movie} />
           ))}
         </div>
-      <Footer />  
+        <Footer />
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const res = await fetch(
+    "https://api.themoviedb.org/3/movie/popular?api_key=" + myKey
+  );
+
+  if (!res.ok) {
+    return {
+      props: {
+        movies: [],
+      },
+    };
+  }
+
+  const data = await res.json();
+
+  return {
+    props: {
+      movies: data.results,
+    },
+  };
 }

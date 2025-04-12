@@ -74,3 +74,6 @@ const PopularFilms = () => {
 };
 
 export default PopularFilms;
+
+
+
