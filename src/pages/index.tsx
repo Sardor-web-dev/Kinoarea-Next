@@ -13,16 +13,18 @@ import { Person } from "@/types/person";
 export default function Home({
   movies,
   persons,
-  upcomingFilms, 
+  upcomingFilms,
+  popularFilms,
 }: {
   movies: Movie[];
   persons: Person[];
-  upcomingFilms: Movie[]; 
+  upcomingFilms: Movie[];
+  popularFilms: Movie[];
 }) {
-  const [visibleMovies, setVisibleMovies] = useState(8); 
+  const [visibleMovies, setVisibleMovies] = useState(8);
 
   const showMoreMovies = () => {
-    setVisibleMovies((prev) => prev + 8); 
+    setVisibleMovies((prev) => prev + 8);
   };
 
   return (
@@ -56,8 +58,7 @@ export default function Home({
           <NewTrailers />
 
           <UpcomingFilms upcomingFilms={upcomingFilms} />
-
-          <PopularFilms />
+          <PopularFilms popularFilms={popularFilms} />
           <Footer />
         </div>
       </div>
@@ -67,7 +68,7 @@ export default function Home({
 
 export async function getServerSideProps() {
   try {
-    const [moviesRes, personsRes, upcomingRes] = await Promise.all([
+    const [moviesRes, personsRes, upcomingRes, popularRes] = await Promise.all([
       fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${myKey}`),
       fetch(
         `https://api.themoviedb.org/3/person/popular?api_key=${myKey}&language=ru-RU&page=1`
@@ -75,21 +76,31 @@ export async function getServerSideProps() {
       fetch(
         `https://api.themoviedb.org/3/movie/upcoming?api_key=${myKey}&language=ru-RU&page=1`
       ),
+      fetch(
+        `https://api.themoviedb.org/3/movie/popular?api_key=${myKey}&language=ru-RU&page=1`
+      ),
     ]);
 
-    if (!moviesRes.ok || !personsRes.ok || !upcomingRes.ok) {
+    if (
+      !moviesRes.ok ||
+      !personsRes.ok ||
+      !upcomingRes.ok ||
+      !popularRes.ok
+    ) {
       throw new Error("Ошибка при загрузке данных");
     }
 
     const moviesData = await moviesRes.json();
     const personsData = await personsRes.json();
     const upcomingData = await upcomingRes.json();
+    const popularData = await popularRes.json();
 
     return {
       props: {
         movies: moviesData.results,
         persons: personsData.results,
-        upcomingFilms: upcomingData.results, 
+        upcomingFilms: upcomingData.results,
+        popularFilms: popularData.results, 
       },
     };
   } catch (error) {
@@ -99,6 +110,7 @@ export async function getServerSideProps() {
         movies: [],
         persons: [],
         upcomingFilms: [],
+        popularFilms: [],
       },
     };
   }

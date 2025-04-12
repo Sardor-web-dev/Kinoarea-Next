@@ -1,29 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import CardMovie from '@/components/custom/CardMovie';
+import React, { useState } from "react";
+import CardMovie from "@/components/custom/CardMovie";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import axios from 'axios';
-import { myKey } from '@/exports';
-import { Movie } from '@/types/movie';
+import { Movie } from "@/types/movie";
 
-const PopularFilms = () => {
-  const [popularFilms, setPopularFilms] = useState([]);
+const PopularFilms = ({ popularFilms }: { popularFilms: Movie[] }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const filmsPerPage = 4;
-
-  useEffect(() => {
-    const fetchPopularFilms = async () => {
-      try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/popular?api_key=${myKey}&language=en-US&page=1`
-        );
-        setPopularFilms(response.data.results);
-      } catch (error) {
-        console.error('Error fetching popular films:', error);
-      }
-    };
-
-    fetchPopularFilms();
-  }, []);
 
   const nextPage = () => {
     if ((currentPage + 1) * filmsPerPage < popularFilms.length) {
@@ -74,6 +56,3 @@ const PopularFilms = () => {
 };
 
 export default PopularFilms;
-
-
-
