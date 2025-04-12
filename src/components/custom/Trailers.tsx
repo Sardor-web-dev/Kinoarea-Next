@@ -18,7 +18,7 @@ interface VideoData {
   key: string;
   name: string;
   site: string;
-  [key: string]: any;
+  [key: string]: string;
 }
 
 const NewTrailers: React.FC = () => {
@@ -67,7 +67,6 @@ const NewTrailers: React.FC = () => {
 
   return (
     <div className="w-full max-w-[1250px] mx-auto px-4 sm:px-6 lg:px-10 mt-10">
-      {/* Контент остается внутри 1250px */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-4">
         <h1 className="font-black text-2xl lg:text-6xl sm:text-3xl md:text-4xl text-white">
           Новые трейлеры
