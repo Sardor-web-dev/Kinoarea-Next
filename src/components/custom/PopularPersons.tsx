@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 interface Person {
@@ -6,13 +7,13 @@ interface Person {
   profile_path: string | null;
 }
 
-const PopularPerson = ({ persons }: {persons: any[]}) => {
+const PopularPerson = ({ persons }: {persons: Person[]}) => {
   console.log(persons);
   const topTwo = persons.slice(0, 2);
-  const rest = persons.slice(2);
+  const rest = persons.slice(0,7);
 
   return (
-    <div className="flex flex-col gap-10 text-white">
+    <div className="flex flex-col mt-10 gap-10 text-white">
       <div className="flex w-full justify-between items-center">
         <p className="text-4xl md:text-6xl font-black">Популярные персоны</p>
         <div className="flex items-center gap-6 text-xl font-bold text-gray-500">
@@ -23,14 +24,16 @@ const PopularPerson = ({ persons }: {persons: any[]}) => {
       </div>
 
       <div className="flex flex-col justify-between lg:flex-row gap-8">
-        <div className="flex gap-6 flex-wrap">
+        <div className="flex gap-6">
           {topTwo.map((person, index) => (
             <Link
               href={`/person/${person.id}`}
               key={person.id}
               className="relative bg-zinc-800 rounded-2xl overflow-hidden w-[300px] h-[420px] shadow-md group"
             >
-              <img
+              <Image
+              width={300}
+              height={420}
                 src={
                   person.profile_path
                     ? `https://image.tmdb.org/t/p/w500${person.profile_path}`

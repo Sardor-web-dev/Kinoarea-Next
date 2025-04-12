@@ -52,7 +52,7 @@ const Film = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="absolute inset-0 bg-black opacity-40 z-10"></div>
+      <div className="absolute inset-0 bg-[black] opacity-50 z-10"></div>
 
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 relative z-20">
         <Header title={film?.title} />

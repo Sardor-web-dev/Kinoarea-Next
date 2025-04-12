@@ -4,28 +4,28 @@ import { FaVk, FaInstagram, FaFacebookF, FaSearch } from "react-icons/fa";
 import { IoLogoTwitter } from "react-icons/io";
 import { Button } from "@/components/ui/button";
 
-
-const Header = ({title}: {title: string}) => {
+const Header = ({ title }: { title: string | undefined }) => {
   const iconStyles = "hover:text-white cursor-pointer transition";
-  const linkStyles = "hover:text-[#3657CB] transition whitespace-nowrap";
+  const linkStyles =
+    "hover:text-[#3657CB] transition whitespace-nowrap text-sm md:text-base"; // Уменьшаем текст на мобильных устройствах
 
   return (
     <>
       <div className="flex w-full max-w-[1250px] flex-col items-center gap-10 px-4 mx-auto">
-        <div className="flex w-full flex-col lg:flex-row items-center justify-between gap-6">
+        <div className="flex w-full lg:flex-row items-center justify-between gap-6">
           <div className="flex flex-col items-center">
             <div>
               <Link href={"/"}>
                 <Image
                   src="/logo.png"
-                  width={150}
-                  height={150}
+                  width={120}
+                  height={120}
                   alt="logo"
                   className="cursor-pointer"
                 />
               </Link>
             </div>
-            <div className="flex gap-2 mt-2 text-xl text-gray-600">
+            <div className="hidden lg:flex gap-2 mt-2 text-xl text-gray-600">
               <FaVk className={iconStyles} title="VK" />
               <FaInstagram className={iconStyles} title="Instagram" />
               <FaFacebookF className={iconStyles} title="Facebook" />
@@ -33,7 +33,7 @@ const Header = ({title}: {title: string}) => {
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4 text-sm md:text-base text-center">
+          <div className="hidden lg:flex flex-wrap justify-center gap-4 text-sm md:text-base text-center">
             <Link className={linkStyles} href="/">
               Афиша
             </Link>
@@ -59,22 +59,21 @@ const Header = ({title}: {title: string}) => {
 
           <div className="flex items-center gap-2">
             <Button
-              className="h-[45px] w-[45px] bg-white cursor-pointer hover:bg-white hover:opacity-75"
+              className="h-[40px] w-[40px] bg-white cursor-pointer hover:bg-white hover:opacity-75"
               aria-label="Поиск"
             >
               <FaSearch className="text-gray-500 hover:text-black" />
             </Button>
 
-            <Button className="w-[120px] h-[45px] bg-[#3657CB] shadow-[0_4px_16px_rgba(8,_112,_184,_0.6)] hover:bg-[#3670CB] cursor-pointer transition-all text-white hover:shadow-[4px_8px_16px_rgba(8,_112,_184,_0.6)]">
+            <Button className="w-[100px] h-[40px] bg-[#3657CB] shadow-[0_4px_16px_rgba(8,_112,_184,_0.6)] hover:bg-[#3670CB] cursor-pointer transition-all text-white hover:shadow-[4px_8px_16px_rgba(8,_112,_184,_0.6)]">
               Войти
             </Button>
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-6 w-full items-center text-center">
-          <p className="text-2xl sm:text-3xl md:text-4xl font-bold w-full">
-            {title}
-          </p>
+        <div className="lg:flex flex-wrap justify-center gap-6 w-full items-center text-center mt-4">
+          <p className="text-2xl sm:text-3xl md:text-4xl font-bold w-full">{title}</p>
+          <div className="hidden lg:flex gap-4">
           <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-white">
             Все
           </p>
@@ -96,6 +95,7 @@ const Header = ({title}: {title: string}) => {
           <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-gray-500">
             Драма
           </p>
+          </div>
         </div>
       </div>
     </>
