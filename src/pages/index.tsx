@@ -30,7 +30,7 @@ export default function Home({
   return (
     <>
       <div
-        className="flex flex-col items-center gap-10 w-full bg-no-repeat bg-center bg-top bg-[#1e2538]"
+        className="flex flex-col items-center gap-10 w-full bg-no-repeat bg-center bg-[#1e2538]"
         style={{
           backgroundImage: "url(/main-bg.png)",
         }}

@@ -42,7 +42,7 @@ const Film = () => {
 
   return (
     <div
-      className="w-full bg-no-repeat h-screen bg-center bg-top bg-[#1e2538] text-white relative"
+      className="w-full bg-no-repeat h-screen bg-centerbg-[#1e2538] text-white relative"
       style={{
         backgroundImage: film?.backdrop_path
           ? `url(https://image.tmdb.org/t/p/original${film.backdrop_path})`
