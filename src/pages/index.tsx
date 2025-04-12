@@ -6,6 +6,8 @@ import CardMovie from "@/components/custom/CardMovie";
 import UpcomingFilms from "@/components/custom/Upcoming";
 import PopularFilms from "@/components/custom/PopularFilms";
 import PopularPerson from "@/components/custom/PopularPersons";
+import NewTrailers from "@/components/custom/Trailers";
+import { useState } from "react";
 import { Person } from "@/types/person";
 
 export default function Home({
@@ -15,6 +17,12 @@ export default function Home({
   movies: Movie[];
   persons: Person[];
 }) {
+  const [visibleMovies, setVisibleMovies] = useState(8); // Изначально показываем 8 фильмов
+
+  const showMoreMovies = () => {
+    setVisibleMovies((prev) => prev + 8); // Увеличиваем количество отображаемых фильмов на 8
+  };
+
   return (
     <>
       <div
@@ -24,15 +32,26 @@ export default function Home({
         }}
       >
         <Header title={"Наиболее популярные"} />
-        <div className="max-w-[1250px]">
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-6">
-            {movies.map((movie) => (
+        <div className="max-w-[1250px] w-full px-4 sm:px-6 lg:px-10">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-6">
+            {movies.slice(0, visibleMovies).map((movie) => (
               <CardMovie key={movie.id} movie={movie} />
             ))}
           </div>
 
-          <PopularPerson persons={persons} />
+          {visibleMovies < movies.length && (
+            <div className="flex justify-center mt-6">
+              <button
+                onClick={showMoreMovies}
+                className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 transition"
+              >
+                Еще
+              </button>
+            </div>
+          )}
 
+          <PopularPerson persons={persons} />
+          <NewTrailers />
           <UpcomingFilms />
           <PopularFilms />
           <Footer />
@@ -41,7 +60,6 @@ export default function Home({
     </>
   );
 }
-
 
 export async function getServerSideProps() {
   try {
