@@ -31,7 +31,7 @@ export default function Home({
       <BaseLayout
         child={
           <>
-            <div className="lg:flex max-w-[1200px] flex justify-center gap-6 w-full items-center text-center mt-4">
+            <div className="lg:flex max-w-[1200px] flex justify-center gap-6 w-full items-center text-center mt-15">
               <p className="text-2xl sm:text-3xl md:text-4xl font-bold w-full">
                 Популярные Фильмы
               </p>
@@ -78,8 +78,8 @@ export default function Home({
                 </div>
               )}
 
-              <PopularPerson persons={persons} />
               <NewTrailers />
+              <PopularPerson persons={persons} />
 
               <UpcomingFilms upcomingFilms={upcomingFilms} />
               <PopularFilms popularFilms={popularFilms} />

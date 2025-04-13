@@ -66,8 +66,8 @@ const NewTrailers: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-[1250px] mx-auto px-4 sm:px-6 lg:px-10 mt-10">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+    <>
+      <div className="flex mt-20 flex-col md:flex-row items-center justify-between gap-4">
         <h1 className="font-black text-2xl lg:text-6xl sm:text-3xl md:text-4xl text-white">
           Новые трейлеры
         </h1>
@@ -142,7 +142,7 @@ const NewTrailers: React.FC = () => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 
