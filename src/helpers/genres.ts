@@ -18,5 +18,5 @@ export const genres: { [key: number]: string } = {
     53: "Триллер",
     10752: "Военный",
     37: "Вестерн"
-  };
+};
   
