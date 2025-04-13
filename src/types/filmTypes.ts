@@ -5,6 +5,7 @@ export type Genre = {
 };
 
 export type Actor = {
+  id: number;
   cast_id: number;
   name: string;
   character: string;

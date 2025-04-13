@@ -3,6 +3,7 @@ import { myKey } from "@/exports";
 import { Person } from "@/types/actor";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 const PersonPage = ({ person }: { person: Person }) => {
   const media = [...(person.combined_credits.cast || [])]
@@ -54,16 +55,18 @@ const PersonPage = ({ person }: { person: Person }) => {
                 className="bg-zinc-800 rounded-xl overflow-hidden shadow-md"
               >
                 <div className="relative w-full h-[250px] sm:h-[300px]">
-                  <Image
-                    src={
-                      item.poster_path
-                        ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-                        : "/no-image.png"
-                    }
-                    alt={item.title || item.name || "Нет названия"}
-                    fill
-                    className="object-cover"
-                  />
+                  <Link href={`/film/${item.id}`}>
+                    <Image
+                      src={
+                        item.poster_path
+                          ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+                          : "/no-image.png"
+                      }
+                      alt={item.title || item.name || "Нет названия"}
+                      fill
+                      className="object-cover"
+                    />
+                  </Link>
                 </div>
                 <div className="p-3">
                   <p className="font-semibold text-white text-sm line-clamp-2">

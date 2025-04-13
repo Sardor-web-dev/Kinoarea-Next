@@ -9,7 +9,7 @@ import { FaHeart } from "react-icons/fa6";
 import { myKey } from "@/exports";
 import Header from "@/components/custom/Header";
 import Image from "next/image";
-import { film } from "@/types/filmTypes";
+import { Actor, film } from "@/types/filmTypes";
 import { GetServerSideProps } from "next";
 
 const Film = ({ film }: { film: film }) => {
@@ -132,17 +132,23 @@ const Film = ({ film }: { film: film }) => {
               В главных ролях:
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
-              {film.credits?.cast?.slice(0, 12).map((actor) => (
+              {film.credits?.cast?.slice(0, 12).map((actor: Actor) => (
                 <div key={actor.cast_id} className="text-center">
-                  <Image
-                    src={`https://image.tmdb.org/t/p/w300${actor.profile_path}`}
-                    alt={actor.name}
-                    width={300}
-                    height={190}
-                    className="rounded-lg object-cover w-full h-auto mb-2"
-                  />
-                  <p className="font-bold text-sm">{actor.name}</p>
-                  <p className="text-xs text-[#F2F60F]">{actor.character}</p>
+                  <Link
+                    className="text-center"
+                    href={`/person/${actor.id}`}
+                    key={actor.id}
+                  >
+                    <Image
+                      src={`https://image.tmdb.org/t/p/w300${actor.profile_path}`}
+                      alt={actor.name}
+                      width={300}
+                      height={190}
+                      className="rounded-lg object-cover w-full h-auto mb-2"
+                    />
+                    <p className="font-bold text-sm">{actor.name}</p>
+                    <p className="text-xs text-[#F2F60F]">{actor.character}</p>
+                  </Link>
                 </div>
               ))}
             </div>
