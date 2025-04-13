@@ -5,11 +5,13 @@ import { GetServerSideProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+
 const PersonPage = ({ person }: { person: Person }) => {
   const media = [...(person.combined_credits.cast || [])]
     .sort((a, b) => (a.popularity || 0) - (b.popularity || 0))
     .reverse();
 
+    
   return (
     <div className="w-full bg-[#1e2538]">
       <div className="min-h-screen bg-[#1c2538] max-w-[1200px] mx-auto text-white px-4 sm:px-6 lg:px-8">
