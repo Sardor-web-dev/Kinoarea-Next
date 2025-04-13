@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { BiDislike, BiLike } from "react-icons/bi";
+import { BiComment, BiDislike, BiLike } from "react-icons/bi";
 import { BsThreeDots } from "react-icons/bs";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -90,15 +90,15 @@ const NewTrailers: React.FC = () => {
         <div className="flex flex-col md:flex-row justify-between mt-4 gap-4">
           <div>
             <h2 className="text-white font-bold text-xl sm:text-2xl md:text-3xl">
-              Жеки Чан
+              {selectedVideo?.key}
             </h2>
             <div className="flex gap-3 mt-2 flex-wrap">
-              <IoLogoVk color="#686868" />
-              <FaInstagram color="#686868" />
-              <FaFacebookF color="#686868" />
-              <FaTwitter color="#686868" />
-              <IoLogoYoutube color="#686868" />
-              <BsThreeDots color="#686868" />
+              <IoLogoVk className="text-gray-500 hover:text-white transition-all cursor-pointer hover:scale-150" />
+              <FaInstagram className="text-gray-500 hover:text-white transition-all cursor-pointer hover:scale-150" />
+              <FaFacebookF className="text-gray-500 hover:text-white transition-all cursor-pointer hover:scale-150" />
+              <FaTwitter className="text-gray-500 hover:text-white transition-all cursor-pointer hover:scale-150" />
+              <IoLogoYoutube className="text-gray-500 hover:text-white transition-all cursor-pointer hover:scale-150" />
+              <BsThreeDots className="text-gray-500 hover:text-white transition-all cursor-pointer hover:scale-150" />
             </div>
           </div>
 
@@ -106,9 +106,10 @@ const NewTrailers: React.FC = () => {
             {[
               { icon: <BiLike />, count: 3245 },
               { icon: <BiDislike />, count: 313 },
+              { icon: <BiComment />, count: 100 },
             ].map((btn, idx) => (
               <div key={idx} className="text-center text-white">
-                <div className="w-10 h-10 md:w-12 md:h-12 bg-[#1B2133] flex items-center justify-center rounded-md hover:scale-95 transition">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-[#1B2133] cursor-pointer flex items-center justify-center rounded-md hover:scale-95 transition">
                   {btn.icon}
                 </div>
                 <span className="text-xs mt-1 block">{btn.count}</span>

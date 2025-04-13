@@ -1,31 +1,8 @@
 import Header from "@/components/custom/Header";
 import { myKey } from "@/exports";
+import { Person } from "@/types/actor";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
-
-interface MediaItem {
-  id: number;
-  media_type: "movie" | "tv";
-  title?: string;
-  name?: string;
-  poster_path: string | null;
-  character?: string;
-  job?: string;
-  popularity?: number;
-}
-
-interface Person {
-  id: number;
-  name: string;
-  birthday: string;
-  biography: string;
-  profile_path: string | null;
-  place_of_birth: string;
-  combined_credits: {
-    cast: MediaItem[];
-    crew: MediaItem[];
-  };
-}
 
 const PersonPage = ({ person }: { person: Person }) => {
   const media = [...(person.combined_credits.cast || [])]
@@ -37,7 +14,6 @@ const PersonPage = ({ person }: { person: Person }) => {
       <div className="min-h-screen bg-[#1c2538] max-w-[1200px] mx-auto text-white px-4 sm:px-6 lg:px-8">
         <Header title={person.name} />
 
-        {/* Персональные данные */}
         <div className="flex flex-col md:flex-row gap-8 md:gap-12 mt-10">
           <div className="relative w-full max-w-[300px] h-[450px] mx-auto md:mx-0 rounded-xl overflow-hidden shadow-xl">
             <Image
@@ -67,7 +43,6 @@ const PersonPage = ({ person }: { person: Person }) => {
           </div>
         </div>
 
-        {/* Фильмография */}
         <div className="mt-12">
           <h2 className="text-2xl sm:text-3xl font-semibold mb-6">
             Фильмография

@@ -11,7 +11,7 @@ const Header = ({ title }: { title: string | undefined }) => {
 
   return (
     <>
-      <div className="flex w-full mt-5 max-w-[1250px] flex-col items-center gap-10 px-4 mx-auto">
+      <div className="flex w-full mb-5 pt-5 max-w-[1250px] flex-col items-center gap-10 px-4 mx-auto">
         <div className="flex w-full lg:flex-row items-center justify-between gap-6">
           <div className="flex flex-col items-center">
             <div>
@@ -68,34 +68,6 @@ const Header = ({ title }: { title: string | undefined }) => {
             <Button className="w-[100px] h-[40px] bg-[#3657CB] shadow-[0_4px_16px_rgba(8,_112,_184,_0.6)] hover:bg-[#3670CB] cursor-pointer transition-all text-white hover:shadow-[4px_8px_16px_rgba(8,_112,_184,_0.6)]">
               Войти
             </Button>
-          </div>
-        </div>
-
-        <div className="lg:flex flex justify-between gap-6 w-full items-center text-center mt-4">
-          <p className="text-2xl sm:text-3xl md:text-4xl font-bold w-full">{title}</p>
-          <div className="hidden lg:flex lg:border-b-3 lg:text-white lg:w-25"></div>
-          <div className="hidden lg:flex gap-4">
-          <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-white">
-            Все
-          </p>
-          <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-gray-500">
-            Боевики
-          </p>
-          <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-gray-500">
-            Приключения
-          </p>
-          <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-gray-500">
-            Комедии
-          </p>
-          <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-gray-500">
-            Фантастика
-          </p>
-          <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-gray-500">
-            Триллеры
-          </p>
-          <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-gray-500">
-            Драма
-          </p>
           </div>
         </div>
       </div>
