@@ -8,6 +8,7 @@ import NewTrailers from "@/components/custom/Trailers";
 import { useState } from "react";
 import { Person } from "@/types/person";
 import BaseLayout from "../../layouts/BaseLayout";
+import { MenuIcon } from "lucide-react";
 
 export default function Home({
   movies,
@@ -31,10 +32,11 @@ export default function Home({
       <BaseLayout
         child={
           <>
-            <div className="lg:flex max-w-[1200px] flex justify-center gap-6 w-full items-center text-center mt-15">
+            <div className="lg:flex max-w-[1200px] flex justify-center gap-6 lg:w-full items-center text-center mt-15">
               <p className="text-2xl sm:text-3xl md:text-4xl font-bold w-full">
                 Популярные Фильмы
               </p>
+              <MenuIcon className="flex cursor-pointer lg:hidden"/>
               <div className="hidden lg:flex lg:border-b-3 lg:text-white lg:w-25"></div>
               <div className="hidden lg:flex gap-4">
                 <p className="text-lg sm:text-xl cursor-pointer hover:text-white transition text-white">
