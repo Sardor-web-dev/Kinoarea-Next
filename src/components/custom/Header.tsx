@@ -4,14 +4,14 @@ import { FaVk, FaInstagram, FaFacebookF, FaSearch } from "react-icons/fa";
 import { IoLogoTwitter } from "react-icons/io";
 import { Button } from "@/components/ui/button";
 
-const Header = ({ title }: { title: string | undefined }) => {
+const Header = () => {
   const iconStyles = "hover:text-white cursor-pointer transition";
   const linkStyles =
     "hover:text-[#3657CB] transition whitespace-nowrap text-sm md:text-base";
 
   return (
     <>
-      <div className="flex w-full mb-5 pt-5 max-w-[1250px] flex-col items-center gap-10 px-4 mx-auto">
+      <div className="flex w-full pt-5 max-w-[1250px] flex-col items-center gap-10 px-4 mx-auto">
         <div className="flex w-full lg:flex-row items-center justify-between gap-6">
           <div className="flex flex-col items-center">
             <div>

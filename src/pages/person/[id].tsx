@@ -12,7 +12,7 @@ const PersonPage = ({ person }: { person: Person }) => {
   return (
     <div className="w-full bg-[#1e2538]">
       <div className="min-h-screen bg-[#1c2538] max-w-[1200px] mx-auto text-white px-4 sm:px-6 lg:px-8">
-        <Header title={person.name} />
+        <Header />
 
         <div className="flex flex-col md:flex-row gap-8 md:gap-12 mt-10">
           <div className="relative w-full max-w-[300px] h-[450px] mx-auto md:mx-0 rounded-xl overflow-hidden shadow-xl">

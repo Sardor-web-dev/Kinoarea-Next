@@ -5,7 +5,7 @@ const BaseLayout = ({ child }: { child: any }) => {
   return (
     <>
       <div className="bg-[#1e2538] ">
-        <Header title={"Наиболее популярные"} />
+        <Header />
         <div
           className="flex flex-col items-center gap-10 w-full bg-no-repeat bg-center bg-[#1e2538]"
           style={{

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Footer from "@/components/custom/footer";
-import { Skeleton } from "@/components/ui/skeleton";
 import { FaVk, FaInstagram, FaFacebookF, FaTwitter } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 import { CiPlay1 } from "react-icons/ci";
@@ -29,7 +28,7 @@ const Film = ({ film }: { film: film }) => {
       <div className="absolute inset-0 bg-[black] opacity-50 z-10"></div>
 
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 relative z-20">
-        <Header title={film?.title} />
+        <Header />
         <div className="py-10">
           <div className="flex flex-col md:flex-row gap-6">
             <div className="w-full max-w-[300px] mx-auto md:mx-0">

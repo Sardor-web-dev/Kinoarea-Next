@@ -12,7 +12,7 @@ export default function Popular({ movies }: { movies: Movie[] }) {
         backgroundImage: "url(/main-bg.png)",
       }}
     >
-      <Header title={"Сейчас в кино"} />
+      <Header />
       <div className="max-w-[1250px]">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-6">
           {movies.map((movie) => (
