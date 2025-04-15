@@ -1,56 +1,59 @@
-import React, { useState } from "react";
-import CardMovie from "@/components/custom/CardMovie";
+import React, { useRef } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { Movie } from "@/types/movie";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { SwiperRef } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import CardMovie from "@/components/custom/CardMovie";
 
 const PopularFilms = ({ popularFilms }: { popularFilms: Movie[] }) => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const filmsPerPage = 4;
+  const swiperRef = useRef<SwiperRef | null>(null);
 
-  const nextPage = () => {
-    if ((currentPage + 1) * filmsPerPage < popularFilms.length) {
-      setCurrentPage(currentPage + 1);
+  const handleNext = () => {
+    if (swiperRef.current) {
+      swiperRef.current.swiper.slideNext();
     }
   };
 
-  const prevPage = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
+  const handlePrev = () => {
+    if (swiperRef.current) {
+      swiperRef.current.swiper.slidePrev();
     }
   };
-
-  const displayedMovies = popularFilms.slice(
-    currentPage * filmsPerPage,
-    (currentPage + 1) * filmsPerPage
-  );
-
   return (
     <div className="mt-12 max-w-[1250px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-4xl md:text-6xl font-black text-white">
           Популярные фильмы
         </h1>
+        <div className="flex items-center gap-5 text-white">
+          <FaArrowLeft
+            className="cursor-pointer hover:opacity-75"
+            onClick={handlePrev}
+          />
+          <FaArrowRight
+            className="cursor-pointer hover:opacity-75"
+            onClick={handleNext}
+          />
+        </div>
       </div>
-
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-10">
-        {displayedMovies.map((movie: Movie) => (
-          <CardMovie key={movie.id} movie={movie} />
+      <Swiper
+        ref={swiperRef}
+        spaceBetween={20}
+        slidesPerView={1}
+        breakpoints={{
+          640: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
+          1024: { slidesPerView: 4 },
+        }}
+      >
+        {popularFilms.map((movie: Movie) => (
+          <SwiperSlide key={movie.id}>
+            <CardMovie movie={movie} />
+          </SwiperSlide>
         ))}
-      </div>
-
-      <div className="flex justify-center items-center gap-5 text-white mt-6 select-none">
-        <FaArrowLeft
-          className="cursor-pointer hover:opacity-75"
-          onClick={prevPage}
-        />
-        <span>
-          {currentPage + 1} / {Math.ceil(popularFilms.length / filmsPerPage)}
-        </span>
-        <FaArrowRight
-          className="cursor-pointer hover:opacity-75"
-          onClick={nextPage}
-        />
-      </div>
+      </Swiper>
     </div>
   );
 };

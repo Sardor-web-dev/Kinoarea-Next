@@ -7,7 +7,7 @@ type Props = {
   movie: Movie;
 };
 
-const CardMovie = ({ movie }: Props) => {
+const CardMovie = ({ movie, }: Props) => {
   const genreList = movie.genre_ids
     .map((id) => genres[id])
     .filter(Boolean)

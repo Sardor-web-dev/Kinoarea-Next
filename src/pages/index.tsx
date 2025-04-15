@@ -73,9 +73,9 @@ export default function Home({
                 <div className="flex justify-center mt-6">
                   <button
                     onClick={showMoreMovies}
-                    className="px-6 py-2 bg-blue-500 cursor-pointer text-white rounded-md hover:bg-blue-700 transition"
+                    className="px-6 py-2 bg-[#1e2538] border-1 opacity-70 border-white cursor-pointer text-white rounded-md hover:opacity-100 transition"
                   >
-                    Еще
+                    Показать еще фильмы
                   </button>
                 </div>
               )}

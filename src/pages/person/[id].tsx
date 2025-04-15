@@ -1,9 +1,9 @@
+import CardMovie from "@/components/custom/CardMovie";
 import Header from "@/components/custom/Header";
 import { myKey } from "@/exports";
 import { Person } from "@/types/actor";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 
 const PersonPage = ({ person }: { person: Person }) => {
@@ -58,48 +58,24 @@ const PersonPage = ({ person }: { person: Person }) => {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6">
             {media.slice(0, visibleCount).map((item) => (
-              <div
+              <CardMovie
                 key={item.id}
-                className="bg-zinc-800 rounded-xl overflow-hidden shadow-md"
-              >
-                <div className="relative w-full h-[250px] sm:h-[300px]">
-                  <Link href={`/film/${item.id}`}>
-                    <Image
-                      src={
-                        item.poster_path
-                          ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-                          : "/no-image.png"
-                      }
-                      alt={item.title || item.name || "Нет названия"}
-                      fill
-                      className="object-cover"
-                    />
-                  </Link>
-                </div>
-                <div className="p-3">
-                  <p className="font-semibold text-white text-sm line-clamp-2">
-                    {item.title || item.name}
-                  </p>
-                  <p className="text-sm text-yellow-400">
-                    {item.character
-                      ? `Роль: ${item.character}`
-                      : item.job
-                      ? `Должность: ${item.job}`
-                      : ""}
-                  </p>
-                  <p className="text-gray-400 text-xs mt-1 uppercase">
-                    {item.media_type === "movie" ? "Фильм" : "Сериал"}
-                  </p>
-                </div>
-              </div>
+                movie={{
+                  id: item.id,
+                  title: item.title || item.name || "Без названия",
+                  poster_path: item.poster_path || "",
+                  release_date: "",
+                  genre_ids: [],
+                }}
+              />
             ))}
           </div>
 
           {visibleCount < media.length && (
-            <div className="flex justify-center mt-8">
+            <div className="flex pb-10 justify-center mt-8">
               <button
                 onClick={loadMore}
-                className="px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold rounded-lg transition duration-300"
+                className="px-6 py-2 bg-[#1e2538] border-1 opacity-70 border-white cursor-pointer text-white rounded-md hover:opacity-100 transition"
               >
                 Показать ещё
               </button>
