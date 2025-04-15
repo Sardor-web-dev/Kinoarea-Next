@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 import { BiComment, BiDislike, BiLike } from "react-icons/bi";
 import { BsThreeDots } from "react-icons/bs";
@@ -64,7 +62,7 @@ const NewTrailers: React.FC = () => {
   useEffect(() => {
     fetchNowPlaying();
   }, []);
-
+  console.log(trailers);
   return (
     <>
       <div className="flex mt-20 flex-col md:flex-row items-center justify-between gap-4">
@@ -90,7 +88,7 @@ const NewTrailers: React.FC = () => {
         <div className="flex flex-col md:flex-row justify-between mt-4 gap-4">
           <div>
             <h2 className="text-white font-bold text-xl sm:text-2xl md:text-3xl">
-              {selectedVideo?.key}
+              {selectedVideo?.title}
             </h2>
             <div className="flex gap-3 mt-2 flex-wrap">
               <IoLogoVk className="text-gray-500 hover:text-white transition-all cursor-pointer hover:scale-150" />

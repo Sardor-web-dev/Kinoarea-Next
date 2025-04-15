@@ -29,7 +29,7 @@ const PopularPerson = ({ persons }: {persons: Person[]}) => {
             <Link
               href={`/person/${person.id}`}
               key={person.id}
-              className="relative bg-zinc-800 rounded-2xl overflow-hidden w-[300px] h-[420px] shadow-md group"
+              className="relative bg-zinc-800 rounded-2xl overflow-hidden w-[350px] h-[420px] shadow-md group"
             >
               <Image
               width={300}
