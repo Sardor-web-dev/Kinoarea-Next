@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BiComment, BiDislike, BiLike } from "react-icons/bi";
 import { BsThreeDots } from "react-icons/bs";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";

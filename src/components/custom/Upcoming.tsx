@@ -1,28 +1,26 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import CardMovie from "@/components/custom/CardMovie";
 import { Movie } from "@/types/movie";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { SwiperRef } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import CardMovie from "@/components/custom/CardMovie";
 
 const UpcomingFilms = ({ upcomingFilms }: { upcomingFilms: Movie[] }) => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const filmsPerPage = 4;
+  const swiperRef = useRef<SwiperRef | null>(null);
 
-  const nextPage = () => {
-    if ((currentPage + 1) * filmsPerPage < upcomingFilms.length) {
-      setCurrentPage(currentPage + 1);
+  const handleNext = () => {
+    if (swiperRef.current) {
+      swiperRef.current.swiper.slideNext();
     }
   };
 
-  const prevPage = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
+  const handlePrev = () => {
+    if (swiperRef.current) {
+      swiperRef.current.swiper.slidePrev();
     }
   };
-
-  const displayedMovies = upcomingFilms?.slice(
-    currentPage * filmsPerPage,
-    (currentPage + 1) * filmsPerPage
-  ) || [];
 
   return (
     <div className="mt-12 max-w-[1250px] mx-auto">
@@ -33,23 +31,31 @@ const UpcomingFilms = ({ upcomingFilms }: { upcomingFilms: Movie[] }) => {
         <div className="flex items-center gap-5 text-white">
           <FaArrowLeft
             className="cursor-pointer hover:opacity-75"
-            onClick={prevPage}
+            onClick={handlePrev}
           />
-          <span>
-            {currentPage + 1} / {Math.ceil(upcomingFilms.length / filmsPerPage)}
-          </span>
           <FaArrowRight
             className="cursor-pointer hover:opacity-75"
-            onClick={nextPage}
+            onClick={handleNext}
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-10">
-        {displayedMovies.map((movie: Movie) => (
-          <CardMovie key={movie.id} movie={movie} />
+      <Swiper
+        ref={swiperRef}
+        spaceBetween={20}
+        slidesPerView={1}
+        breakpoints={{
+          640: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
+          1024: { slidesPerView: 4 },
+        }}
+      >
+        {upcomingFilms.map((movie: Movie) => (
+          <SwiperSlide key={movie.id}>
+            <CardMovie movie={movie} />
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </div>
   );
 };
